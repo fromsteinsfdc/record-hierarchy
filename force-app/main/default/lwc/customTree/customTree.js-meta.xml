@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Record Hierarchy</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightningCommunity__Default">
+            <property name="label" label="Component label" type="String" default="Record Hierarchy"/>
+            <property name="parentField" label="Select lookup to parent" description="Select the lookup field that connects a child record to its parent" placeholder="e.g. ParentId, Custom_Parent_lookup__c, etc" type="String" required="true" datasource="apex://LWCPicklist_ParentLookups" default=""/>
+            <property name="fieldString" label="Field string" description="Comma-separated list of field API names to display in the hierarchy" placeholder="e.g. Name,Amount,My_Custom_Field__c" type="String" required="true" default="Name"/>
+            <property name="imageField" label="Image field" description="Enter the name of a field containing an image URL" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle> 

@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title={label}>
+        <lightning-button-group slot="actions" onclick={handleTrickleAction}>
+            <!--
+            <lightning-button-icon icon-name="utility:home" name="openToCurrent" alternative-text="Expand to current record" title="Expand to current record"></lightning-button-icon>
+            <lightning-button-icon icon-name="utility:expand" name="expandAll" alternative-text="Expand all" title="Expand all"></lightning-button-icon>
+            <lightning-button-icon icon-name="utility:contract" name="collapseAll" alternative-text="Collapse all" title="Collapse all"></lightning-button-icon>
+            -->
+            <template for:each={rootActions} for:item="action">
+                <lightning-button-icon key={action.name} icon-name={action.icon} name={action.name} alternative-text={action.title} title={action.title}></lightning-button-icon>
+            </template>
+        </lightning-button-group>
+        <lightning-input type="search" placeholder="Type to filter" onchange={handleSearch}></lightning-input>
+        <template if:true={rendered}>
+            <div class="slds-tree_container">
+                <ul aria-labelledby="treeheading" class="slds-tree" role="tree">
+                    <template for:each={items} for:item="item" class="itemList">
+                        <c-custom-tree-item key={item.value} label={item.label} value={item.value}
+                            metatext={item.metatext} items={item.items} parent={item.parent} level={item.level}
+                            match-values={item.matchValues} current={item.current} expanded={item.expanded}
+                            hidden={item.hidden} image={item.image} search-text={searchText} drag-state={dragState}
+                            fields={fields} trickle-action={trickleAction} actions={item.actions} onstartdrag={handleChildDrag}>
+                        </c-custom-tree-item>
+                    </template>
+                </ul>
+            </div>
+        </template>
+        <template if:false={rendered}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>
